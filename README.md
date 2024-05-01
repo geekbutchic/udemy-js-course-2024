@@ -1,1 +1,1 @@
-# udemy-js-course-2024
+# UDEMY JS COURSE 2024
