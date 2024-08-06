@@ -1,6 +1,6 @@
 // Statements vs Expressions
 
-// Expressions evaluate to a VALUE.
+// Expressions/Operator evaluate to a VALUE.
 
 42; // Numeric literal
 ("hello"); // String literal
