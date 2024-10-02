@@ -73,42 +73,93 @@ function Person(name) {
 const person = new Person("John");
 console.log(person.name); // Logs 'John' because `this` refers to the new `Person` instance
 ```
+
 In this example, **this** refers to the newly created object when the **Person** constructor is invoked using **new**.
 
-4) **Explicit Binding** (call, apply, bind) JavaScript provides methods like call(), apply(), and bind() to explicitly set the context of **this** when calling a function.  This allows you to manually assign the context you want.
+4. **Explicit Binding** (call, apply, bind) JavaScript provides methods like call(), apply(), and bind() to explicitly set the context of **this** when calling a function. This allows you to manually assign the context you want.
 
 ```js
-const person1 = { name: 'Alice' };
-const person2 = { name: 'Bob' };
+const person1 = { name: "Alice" };
+const person2 = { name: "Bob" };
 
 function greet() {
   console.log(`Hello, ${this.name}`);
 }
 
-greet.call(person1);  // Logs 'Hello, Alice'
-greet.call(person2);  // Logs 'Hello, Bob'
+greet.call(person1); // Logs 'Hello, Alice'
+greet.call(person2); // Logs 'Hello, Bob'
 ```
 
-5) **Arrow Function Context** Arrow functions behave differently from regular functions when it comes to **this**. They do not have their own **this** value; instead, they inherit the **this** value from their enclosing scope.
+5. **Arrow Function Context** Arrow functions behave differently from regular functions when it comes to **this**. They do not have their own **this** value; instead, they inherit the **this** value from their enclosing scope.
 
 ```js
 const person = {
-  name: 'John',
+  name: "John",
   greet: () => {
     console.log(this.name);
   }
 };
 
-person.greet();  // Logs `undefined` because `this` refers to the outer (global) context, not the `person` object.
+person.greet(); // Logs `undefined` because `this` refers to the outer (global) context, not the `person` object.
 ```
 
 ### Summary of Object Context
 
-* Object context determines what this refers to in a function. The context can be different depending on how a function is called (globally, as a method, with new, etc.).
+- Object context determines what this refers to in a function. The context can be different depending on how a function is called (globally, as a method, with new, etc.).
 
-* Methods (call(), apply(), bind()) allow you to explicitly control the context.
+- Methods (call(), apply(), bind()) allow you to explicitly control the context.
 
-* Arrow functions don't bind their own this and instead inherit it from their surrounding context.
+- Arrow functions don't bind their own this and instead inherit it from their surrounding context.
 
 # Lesson 33 : Functions
 
+In JS, a function is a usable block of code that performs a specific task. They take in put (parameters), process it, and may return an output (a result).
+
+### Key Concepts of Functions in JS.
+
+1. **Functions Declaration** (Named Function) A function can be declared using the **function** keyword, followed by the function name, a list of parameters in parentheses, and a block of code inside curly braces {}.
+
+```js
+function greet(name) {
+  console.log(`Hello, ${name}`);
+}
+
+greet(`Tom`);
+```
+
+In this example: **greet** is the function name, **name** is the parameter.
+
+2. **Function Expression** (Anonymous Function). A function can also be created as an expression and assigned to a variable. This is known as a function expression. The function in this case can be unnamed (anonymous).
+
+```js
+const greet = function (name) {
+  console.log(`Hello, ${name}!`);
+};
+
+greet("Bob"); // Output: Hello, Bob!
+```
+
+Here, the function is assigned to the variable **greet**, and it can be invoked using that variable.
+
+### Arrow Function (ES6) 
+
+Arrow functions are a shorthand introduced in ES6. They offer a more concise syntax and automatically bind the **this** keyword based on the surrounding context.
+
+```js
+const greet = (name) => {
+  console.log(`Hello, ${name}!`);
+};
+
+greet("Charlie"); // Output: Hello, Charlie!
+```
+If the function has only one parameter and one expression, you can omit the parentheses around the parameter and the curly braces {}.
+
+Example: 
+```js
+const greet = name => console.log(`Hello, ${name}!`);
+greet('David');  // Output: Hello, David!
+```
+
+### Parameters and Arguments
+
+* Parameters are placeholders listed in the function definition, and they represent the inputs a function expects.
