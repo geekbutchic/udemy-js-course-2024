@@ -141,7 +141,7 @@ greet("Bob"); // Output: Hello, Bob!
 
 Here, the function is assigned to the variable **greet**, and it can be invoked using that variable.
 
-### Arrow Function (ES6) 
+### Arrow Function (ES6)
 
 Arrow functions are a shorthand introduced in ES6. They offer a more concise syntax and automatically bind the **this** keyword based on the surrounding context.
 
@@ -152,14 +152,116 @@ const greet = (name) => {
 
 greet("Charlie"); // Output: Hello, Charlie!
 ```
+
 If the function has only one parameter and one expression, you can omit the parentheses around the parameter and the curly braces {}.
 
-Example: 
+Example:
+
 ```js
-const greet = name => console.log(`Hello, ${name}!`);
-greet('David');  // Output: Hello, David!
+const greet = (name) => console.log(`Hello, ${name}!`);
+greet("David"); // Output: Hello, David!
 ```
 
 ### Parameters and Arguments
 
-* Parameters are placeholders listed in the function definition, and they represent the inputs a function expects.
+- **Parameters** are placeholders listed in the function definition, and they represent the inputs a function expects.
+- **Arguments** are the actual values you pass to a function when calling it.
+
+Example:
+
+```js
+function add(a, b) {
+  return a + b;
+}
+
+const result = add(3, 5); // Arguments: 3 and 5
+console.log(result); // Output: 8
+```
+
+### Return Statement Function
+
+Can return a value using the **return** keyword. When a function returns a value, that value can be used by the code that calls the function.
+
+Example:
+
+```js
+function multiply(a, b) {
+  return a * b;
+}
+
+const product = multiply(4, 5);
+console.log(product); // Output: 20
+```
+
+### Default Parameters in JS
+
+You can provide default values for parameters, which will be used if no argument is passed for that parameter.
+
+Example:
+
+```js
+function greet(name = "Stranger") {
+  console.log(`Hello, ${name}!`);
+}
+
+greet(); // Output: Hello, Stranger!
+```
+
+### Higher-Order Functions
+
+A higher-order function is a function that takes another function as an argument or returns a function as a result.
+
+Example:
+
+```js
+function greet(callback) {
+  callback();
+}
+
+function sayHello() {
+  console.log("Hello!");
+}
+
+greet(sayHello); // Output: Hello!
+```
+
+### Function Scope Functions
+
+Functions in JS have their own scope. Variables declared inside a function are local to that function and cannot be accessed form outside.
+
+Example
+
+```js
+function greet() {
+  const message = "Hello, World!";
+  console.log(message);
+}
+
+greet(); // Output: Hello, World!
+console.log(message); // Error: message is not defined
+```
+
+- Local Scope : Variables declared inside a function.
+- Global Scope: Variables declared outside all functions.
+
+### Anonymous Functions
+
+Anonymous functions are functions without a name. They are typically used where functions are needed as arguments or when they are immediately executed.
+
+```js
+function greet(callback) {
+  callback();
+}
+
+greet(function () {
+  console.log("Hello, this is an anonymous function!");
+});
+```
+### Anonymous Functions 
+
+Breakdown:
+
+* Instead of passing a named function like **sayHello**, we pass an **anonymous** functions directly to **greet**.
+* This anonymous function is executed inside **greet**, and it prints "Hello, this is an anonymous function!" to the console.
+
+To be continued...
