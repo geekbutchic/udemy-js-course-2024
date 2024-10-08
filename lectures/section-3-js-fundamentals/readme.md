@@ -257,11 +257,34 @@ greet(function () {
   console.log("Hello, this is an anonymous function!");
 });
 ```
-### Anonymous Functions 
+
+### Anonymous Functions
 
 Breakdown:
 
-* Instead of passing a named function like **sayHello**, we pass an **anonymous** functions directly to **greet**.
-* This anonymous function is executed inside **greet**, and it prints "Hello, this is an anonymous function!" to the console.
+- Instead of passing a named function like **sayHello**, we pass an **anonymous** functions directly to **greet**.
+- This anonymous function is executed inside **greet**, and it prints "Hello, this is an anonymous function!" to the console.
 
-To be continued...
+### Common Use Cases for Anonymous Functions:
+
+1. Event Handlers:
+
+```js
+document.querySelector("button").addEventListener("click", function () {
+  console.log("Button clicked!");
+});
+```
+
+2. Array Methods
+
+```js
+let numbers = [1, 2, 3, 4, 5];
+let doubled = numbers.map(function (number) {
+  return number * 2;
+});
+
+console.log(doubled); // [2, 4, 6, 8, 10]
+```
+
+Anonymous functions are great for situations where you only need the function for a short period of time and don't need to reference it elsewhere in your code.
+
