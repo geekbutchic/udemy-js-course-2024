@@ -288,3 +288,74 @@ console.log(doubled); // [2, 4, 6, 8, 10]
 
 Anonymous functions are great for situations where you only need the function for a short period of time and don't need to reference it elsewhere in your code.
 
+# Lesson 34
+
+## Function Declaration vs Function Expression
+
+### Function Declaration
+
+- A function declaration defines a function with the **function** keyword, followed by the function name, parameter, and body.
+- Hoisting: Function declaration are hoisted to the top of their scope. This means you can call the function before its declaration in the code.
+
+```js
+//Can call prior before defining it
+const result = calcAge1(1984);
+console.log(`Function Declaration: `, result); // 40
+
+//Function Declaration
+function calcAge1(birthYear) {
+  const age = 2024 - birthYear;
+  return age;
+}
+```
+
+### Function Expression
+
+- A function expression involved assigning a function to a variable. The function can be anonymous (no name) or named.
+- Not Hoisted: Function expressions are not hoisted. You cannot call the function before it is defined.
+
+```js
+//Function Expression
+const calcAge2 = function (birthYear) {
+  const age = 2024 - birthYear;
+  return age;
+};
+
+const result2 = calcAge2(1984);
+console.log(`Function Expression: `, result2);
+```
+
+### Key Differences:
+
+![](/images/image-1.jpeg)
+
+Another Example:
+
+```js
+// Function Declaration
+function add(a, b) {
+  return a + b;
+}
+
+// Function Expression
+const subtract = function (a, b) {
+  return a - b;
+};
+
+console.log(add(3, 4)); // Output: 7
+console.log(subtract(10, 4)); // Output: 6
+```
+
+### In short:
+
+- Function declarations are hoisted and can be called before they are defined.
+
+- Function expressions are not hoisted, so they can only be called after they are assigned to a variable.
+
+### General Best Practice:
+
+- Modularize your code: Whether using declarations or expressions, always aim to break your code into small, reusable functions.
+
+- Use **const** for function expressions: This ensures that the function reference can't be reassigned, preventing accidental changes.
+
+In most modern JavaScript development, arrow functions and function expressions are widely used because of their concise syntax, particularly in frameworks like React. However, for clarity and traditional reusable functions, function declarations are still perfectly valid.
