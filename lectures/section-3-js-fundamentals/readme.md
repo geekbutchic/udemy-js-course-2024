@@ -359,3 +359,6 @@ console.log(subtract(10, 4)); // Output: 6
 - Use **const** for function expressions: This ensures that the function reference can't be reassigned, preventing accidental changes.
 
 In most modern JavaScript development, arrow functions and function expressions are widely used because of their concise syntax, particularly in frameworks like React. However, for clarity and traditional reusable functions, function declarations are still perfectly valid.
+
+# Lesson 35 Arrow Functions
+
