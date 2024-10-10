@@ -362,3 +362,42 @@ In most modern JavaScript development, arrow functions and function expressions 
 
 # Lesson 35 Arrow Functions
 
+- Arrow functions in JS offer a more concise syntax compared to traditional function expressions and come with a few key differences.
+
+### 1. Syntax and Conciseness
+
+- Arrow functions provide a shorter syntax, especially useful for small functions.
+- When the function body has a single expression, you can omit the curly braces adn the (return) statement (implicit return).
+
+```js
+const sum = (a, b) => a + b; // Implicit return
+```
+
+If you have multiple lines ore more complex login, you would use curly braces and need to explicitly return the value.
+
+```js
+const sum = (a, b) => {
+  const total = a + b;
+  return total; // Explicit return
+};
+```
+
+### 2. Lexical this binding.
+
+- Arrow functions do not bind their own this. Instead, they inherit this from the surrounding (lexical) context.
+- This makes arrow functions particularly useful when working with methods in objects or callbacks, where the regular **function** keyword would result in this being re-bound.
+
+Example:
+
+```js
+const person = {
+  name: "Sonny",
+  greet: function () {
+    setTimeout(() => {
+      console.log(`Hello, ${this.name}`); // `this` refers to the person object
+    }, 1000);
+  }
+};
+person.greet(); // Output: Hello, Sonny
+```
+If a regular function was used inside **setTimeout**, **this** would refer to the global object (for undefined) in strict mode.

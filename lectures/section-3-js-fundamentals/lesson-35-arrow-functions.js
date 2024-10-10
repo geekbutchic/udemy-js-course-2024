@@ -46,3 +46,4 @@ const yearsUntilRetirement2 = (birthYear, firstName) => {
 
 const result3 = yearsUntilRetirement2(1984, "Sonny");
 console.log(`With Two Params:`,result3);
+
