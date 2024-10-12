@@ -400,4 +400,83 @@ const person = {
 };
 person.greet(); // Output: Hello, Sonny
 ```
-If a regular function was used inside **setTimeout**, **this** would refer to the global object (for undefined) in strict mode.
+
+If a regular function was used inside **setTimeout**, **this** would refer to the global object (for undefined in strict mode).
+
+### 3. No Arguments Object
+
+- Arrow functions do not have their own **arguments** object. If you need access to the arguments, you must either use the rest parameter (...args) or use a traditional function.
+
+```js
+const sum = (...args) => args.reduce((acc, cur) => acc + cur, 0);
+console.log(sum(1, 2, 3)); // Output: 6
+```
+
+Example with a traditional function:
+
+```js
+function sum() {
+  return Array.from(arguments).reduce((acc, cur) => acc + cur, 0);
+}
+```
+
+### 4. Cannot be used as Constructors
+
+- Arrow functions cannot be used as constructors, meaning you cannot use the **new** keyword with them. Traditional functions can be used to create new instances of objects, but arrow functions lack the internal [[Construct]] method necessary for this.
+
+```js
+const Person = (name) => {
+  this.name = name;
+};
+const me = new Person("Sonny"); // TypeError: Person is not a constructor
+```
+
+A traditional function would work for object construction:
+
+```js
+function Person(name) {
+  this.name = name;
+}
+const me = new Person("Sonny"); // Works fine
+```
+
+### 5. Arrow Functions as Methods
+
+- Arrow functions should not be used as methods in objects because they don not have their own **this** context. Instead, they inherit **this** from the enclosing context, which may not behave as expected.
+
+### 5. Arrow Functions as Methods
+
+- **Arrow Functions** should not be used as methods in objects because they do not have their own **this** context. Instead, they inherit **this** from the enclosing context, which may not behave as expected.
+
+Example:
+
+```js
+const person = {
+  name: "Sonny",
+  greet: () => {
+    console.log(`Hello, ${this.name}`); // Incorrect: `this` is not bound to person
+  }
+};
+person.greet(); // Output: Hello, undefined
+```
+
+A regular function should be used for object method:
+
+```js
+const person = {
+  name: "Sonny",
+  greet() {
+    console.log(`Hello, ${this.name}`); // Correct: `this` refers to the person object
+  }
+};
+person.greet(); // Output: Hello, Sonny
+```
+### 6. Cannot have a Prototype
+* Arrow functions do not have **prototype** property, meaning they cannot be used to define prototype methods for classes or objects.
+
+When to Use Arrow Functions
+* Callbacks: Arrow functions are great for callbacks, like in array methods (map, filter, etc), or in setTimeout.
+* Anonymous Functions: They are perfect for short, anonymous functions that don't need their own **this** or **arguments**.
+* Event Handlers: Useful when yo need the lexical **this**.
+
+In summary, arrow functions are a concise, modern way to define functions in JavaScript, especially when you need to preserve this from the surrounding context. However, they should be avoided when a function needs its own this, arguments, or will be used as a constructor.
