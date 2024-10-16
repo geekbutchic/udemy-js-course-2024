@@ -480,3 +480,6 @@ When to Use Arrow Functions
 * Event Handlers: Useful when yo need the lexical **this**.
 
 In summary, arrow functions are a concise, modern way to define functions in JavaScript, especially when you need to preserve this from the surrounding context. However, they should be avoided when a function needs its own this, arguments, or will be used as a constructor.
+
+# Lesson 36 Callback Functions
+
