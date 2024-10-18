@@ -471,15 +471,130 @@ const person = {
 };
 person.greet(); // Output: Hello, Sonny
 ```
+
 ### 6. Cannot have a Prototype
-* Arrow functions do not have **prototype** property, meaning they cannot be used to define prototype methods for classes or objects.
+
+- Arrow functions do not have **prototype** property, meaning they cannot be used to define prototype methods for classes or objects.
 
 When to Use Arrow Functions
-* Callbacks: Arrow functions are great for callbacks, like in array methods (map, filter, etc), or in setTimeout.
-* Anonymous Functions: They are perfect for short, anonymous functions that don't need their own **this** or **arguments**.
-* Event Handlers: Useful when yo need the lexical **this**.
+
+- Callbacks: Arrow functions are great for callbacks, like in array methods (map, filter, etc), or in setTimeout.
+- Anonymous Functions: They are perfect for short, anonymous functions that don't need their own **this** or **arguments**.
+- Event Handlers: Useful when yo need the lexical **this**.
 
 In summary, arrow functions are a concise, modern way to define functions in JavaScript, especially when you need to preserve this from the surrounding context. However, they should be avoided when a function needs its own this, arguments, or will be used as a constructor.
 
 # Lesson 36 Callback Functions
 
+Example on Functions calling Functions:
+
+1. Create a function called **'describePopulation'**. Use the function type you like the most. This function takes in two arguments: **'country'** and **'population'**, and returns a string like this: **'China has 1441 million people, which is about 18.2% of the world'**.
+
+2. To calculate the percentage **'describePopulation'** call the **'percentageOfWorld'** you created earlier.
+
+3. Call **'describePopulation'** with data for 3 countries of your choice.
+
+### Breakdown:
+
+## 1. Function Declaration:
+
+You have two functions:
+
+- percentageOfWorld(population, worldPopulation)
+- describePopulation(country, population)
+
+```js
+function percentageOfWorld(population, worldPopulation = 8200000000) {
+  const populationPercentage = ((population * 1000000) / worldPopulation) * 100;
+  return populationPercentage;
+}
+```
+
+- Takes two arguments: **population** (population in millions) and **worldPopulation** (defaulted to 8.2 billion).
+- It calculates the percentage of the world's population that a given country represents and returns that result.
+
+```js
+function describePopulation(country, population) {
+  const percentage = percentageOfWorld(population);
+  return `${country} has ${population.toFixed(
+    2
+  )} million people, which is about ${percentage.toFixed(2)}% of the world.`;
+}
+```
+
+- Takes two arguments: **country** (the name of the country) and **population** (the population of that country in millions).
+- It calls percentageOfWorld(population) to get the percentage of the world population.
+- It formats and returns a string describing the population and the percentage of the world's population for the country.
+
+## 2. How Data is Passed and Processed:
+
+a. Calling the function
+
+```js
+const result = describePopulation("USA", 335.893238);
+```
+
+- You're calling **describePopulation** with two arguments:
+- **country = "USA"**
+- **population = 335.893238 (million)**
+
+b. Inside **describePopulation**:
+
+```js
+const percentage = percentageOfWorld(population);
+```
+
+- The value of **population** passed is **335.893238** (USA's population in millions).
+- This value is now passed as an argument to the **percentageOfWorld** function.
+
+c. Inside **percentageOfWorld**:
+
+```js
+const result = ((population * 1000000) / worldPopulation) * 100;
+```
+
+- **population** here is **335.893238**, passed from the **describePopulation** function.
+- **worldPopulation** is the default value of **8.2 billion**.
+- The calculation converts the population to individuals **(population \* 1000000)** and then calculates the percentage of the world population by dividing by **worldPopulation \* 100**.
+
+For example:
+
+```js
+result = 335.893238 * 1000000 / 8200000000 * 100;
+result ≈ 4.09;
+```
+
+This percentage **(4.09%)** is returned to the **describePopulation** function.
+
+d. Back in **describePopulation**:
+
+Now, the **percentage** variable has the value **4.09**.
+
+The **return** statement in **describePopulation** is:
+
+```js
+return `${country} has ${population.toFixed(
+  2
+)} million people, which is about ${percentage.toFixed(2)}% of the world.`;
+```
+* country is "USA".
+* population.toFixed(2) gives 335.89 (rounded to 2 decimal places).
+* percentage.toFixed(2) gives 4.09 (rounded to 2 decimal places).
+
+Final Solution:
+```js
+function percentageOfWorld(population, worldPopulation = 8200000000) {
+  const result = population * 1000000 / worldPopulation * 100;
+  return result;
+}
+
+function describePopulation(country, population) {
+  const percentage = percentageOfWorld(population);
+  return `${country} has ${population.toFixed(
+    2
+  )} million people, which is about ${percentage.toFixed(2)}% of the world.`;
+}
+
+const result = describePopulation("USA", 335.893238);
+console.log(result);
+```
